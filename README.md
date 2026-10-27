@@ -37,18 +37,28 @@ export time (sha256 below).
 
 | File | Paperclip attachment | sha256 (first 12) |
 |---|---|---|
-| `mockups/neurora-facetoface-mockup-v3.html` | `741c793a-…` | `20a3c0b53644` |
-| `state-sheets/neurora-facetoface-state-sheet-v3.png` | `f87cd865-…` | `bbd48cfb76f8` |
-| `mockups/neurora-home-solo-mockup-v1.html` | `91e1d258-…` (uploaded as `neurora-home-solo-final.html`) | `0d7c6fa226fe` |
-| `state-sheets/neurora-home-solo-state-sheet-v2.png` | `057620b9-…` | `fb11b1e39ee6` |
-| `mockups/neurora-packs-mockup-v2.html` | `2eafac82-…` | `43ee01cecc01` |
-| `state-sheets/neurora-packs-state-sheet-v2.png` | `8b409324-…` | `c41a577e2f84` |
+| `mockups/neurora-facetoface-mockup-v4.html` | `463f0a6b-…` | `ca935add61b2` |
+| `state-sheets/neurora-facetoface-state-sheet-v4.png` | `c46a2144-…` | `15742f714cfd` |
+| `mockups/neurora-home-solo-mockup-v2.html` | `2f515f51-…` | `b3966bb24ff6` |
+| `state-sheets/neurora-home-solo-state-sheet-v3.png` | `d7cfd616-…` | `578d192b9f77` |
+| `mockups/neurora-packs-mockup-v3.html` | `41ee4490-…` | `1f77349dfa13` |
+| `state-sheets/neurora-packs-state-sheet-v3.png` | `0784678c-…` | `b1ac3925429b` |
+| `mockups/archive/neurora-facetoface-mockup-v3.html` | `741c793a-…` | `20a3c0b53644` |
+| `state-sheets/archive/neurora-facetoface-state-sheet-v3.png` | `f87cd865-…` | `bbd48cfb76f8` |
+| `mockups/archive/neurora-home-solo-mockup-v1.html` | `91e1d258-…` (uploaded as `neurora-home-solo-final.html`) | `0d7c6fa226fe` |
+| `state-sheets/archive/neurora-home-solo-state-sheet-v2.png` | `057620b9-…` | `fb11b1e39ee6` |
+| `mockups/archive/neurora-packs-mockup-v2.html` | `2eafac82-…` | `43ee01cecc01` |
+| `state-sheets/archive/neurora-packs-state-sheet-v2.png` | `8b409324-…` | `c41a577e2f84` |
 | `mockups/archive/neurora-facetoface-mockup-v2.html` | `3c05498d-…` | `ca13e9658a8f` |
 | `mockups/archive/neurora-facetoface-mockup-v1.html` | `8c15859e-…` | `594779c6d1b7` |
 | `mockups/archive/neurora-packs-mockup-v1.html` | `bde05d22-…` | `1fe1706ab2ea` |
 | `state-sheets/archive/neurora-facetoface-v2-state-sheet.png` | `bbd2c075-…` | `16170437c90c` |
 | `state-sheets/archive/neurora-home-solo-state-sheet.png` | `2ed4e127-…` | `1392cccc515a` |
 | `state-sheets/archive/neurora-packs-state-sheet-v1.png` | `36beece3-…` | `cc9eb7e1c258` |
+
+The verification harness itself is archived here under `tools/` (auditor,
+sheet composer, paint probes) — the same code that produced
+`verification/verification-2026-10-27-rev2.md` can re-verify any future rev.
 
 **Not mirrored:** the founder-supplied brand boards and current-build captures
 (2026-10-14, user-owned uploads — remain on the issue thread), and the five
@@ -58,12 +68,14 @@ mockups).
 ## Design language, in one paragraph
 
 Ink on paper, near-monochrome by construction. Exactly one hue exists — **acid
-#E6FF00** — and it is functional, not decorative: it marks the live-capture
-affordance (orb on home/solo; active mic zone on the conversation split) — and,
-per founder decision 2026-10-27, anything *live/operative*: ready-status dots,
-download progress, and confirm primaries on the packs surface. There is no error
-color anywhere; failures are mono-gray honest copy. Full token set
-and rationale: `specs/design-system-tokens.md`, `specs/design-language.md`.
+#E6FF00** — and it is functional, not decorative: it marks anything
+*live/operative* (capture orb, live mic zone, ready-status dots, download
+progress, confirm primaries). Idle actions are ink; failures are mono-gray
+honest copy — there is no error color anywhere. Everything structural sits on a
+**4pt-unit grid** with 20pt margins and a five-shape radius law (circle / pill /
+chip 8 / control 12 / sheet 24) — defined and made binding in
+`specs/design-system-tokens.md` §0, 2026-10-27 (founder order). Token set +
+rationale: `specs/design-system-tokens.md`, `specs/design-language.md`.
 
 — Jonas Ferreira (product design). Maintainer of this archive; Maya Lindqvist
 verifies builds against these specs (per-spec §9 checklists).

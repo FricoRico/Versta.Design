@@ -1,13 +1,13 @@
 ---
-title: "Hi-fi spec — conversation split (Face-to-Face) v1"
-paperclip_issue: NEU-57
-document_key: hifi-conversation
-revision: 1
-revision_id: d7debda7-dbfd-4c5e-b98e-d74e58316617
-exported: 2026-10-27
+key: hifi-conversation
+revision: 2
+updated: 2026-10-27T18:02:35.287Z
+source: paperclip
 ---
 
-# Hi-fi spec — conversation split (Face-to-Face) · v1
+# Hi-fi spec — conversation split (Face-to-Face) · v2
+
+> **Rev 2 (2026-10-27, second founder revision pass):** declutter + grid/shape compliance. Traveler sheet loses the utility icon row (text/camera utilities live on the home dock — one home per utility); partner meta drops the redundant `JAPANESE — OFFLINE` (the header pair label + OFFLINE pill already carry it) and keeps the honest size: `🔊 84 MB`. Sheet top padding 44→24pt. Flip affordance now top 8 / right 16. All radii resolve to the shape law ([tokens §0.6](design-system-tokens)); the whole surface aligns to the 4pt grid (tokens §0) — mockup v4 is the verified reference.
 
 **What this is:** the pixel-level spec for the conversation surface, built in the reconciled ink/acid design language. Sources: [concepts doc](concepts) rev 4 §Adapts/§Diverges (binding decisions) and [design language inventory](design-language) v1 (measured tokens). Runtime constraints from ADR-0001 rev 3 are binding: **no cancel affordance anywhere; translations complete sub-200 ms; the one-beat shimmer is the only transition theater** (regression path per concepts doc §Runtime-constraints).
 
@@ -24,7 +24,7 @@ Verification notes for Maya are in §9 — every number she needs to compare emu
 │                              │
 │   PARTNER PANEL (ink)        │  ← rotates 180° in face-to-face mode
 │   Display text ≥28pt         │     default share: 46% of viewport
-│   JAPANESE — OFFLINE · 84 MB │
+│   🔊 84 MB                   │
 │                              │
 ├──  ════════ ═══  ────────────┤  ← divider grabber, 28pt hit zone
 │ [SPEAK EN] │ [話す JA]        │  ← split mic bar, 64pt, straddles seam
@@ -81,9 +81,9 @@ Rationale (concepts §Adapts-1): the boards' single orb leaves turn assignment a
 
 **Partner panel** (what the local across the counter sees):
 - Live: latest partner-language line, Display 34pt, white on ink, max 3 lines → scale to 28pt floor.
-- Meta line: mono caps acid `JAPANESE — OFFLINE · 84 MB`, trailing speaker glyph (replay) + size honesty (§Carries-4).
+- Meta line: one item only — trailing speaker glyph + honest size `84 MB` (§Carries-4). ~~`JAPANESE — OFFLINE`~~ removed in v2: redundant with the header pair label and the OFFLINE pill (declutter pass).
 - Privacy line, mono-gray #5D5D5D: `—— SPEECH STAYS ON YOUR PHONE` — visible in listening state on both halves.
-- Flip affordance: 24pt icon, top-right of the partner panel (bottom-right when rotated), white 60%, ≥44pt hit.
+- Flip affordance: 24pt icon at top 8 / right 16 of the partner panel (bottom-left when rotated), white 60%, 44pt hit. Radius/shape per tokens §0.6.
 - Sun-invert toggle: lives behind the flip affordance's long-press (invert partner panel to paper/ink-text for direct-sun counters — Diverges-2; beta-validate). Not a header control; discoverability via first-run coach mark #2.
 
 ## 5 · States
@@ -106,8 +106,8 @@ Rationale (concepts §Adapts-1): the boards' single orb leaves turn assignment a
 - **Turn arbitration** — exactly one capture channel open at a time (§5.6). Steal commits, never discards audio already heard.
 - **TTS routing** — partner language plays toward the partner (flip mode: same speaker, but the *screen* honors orientation); replay never re-arms a mic.
 - **Divider physics** — snap-only (§5.7); content re-flows live during drag (elastic, per feasibility Q2 cost check).
-- **Keyboard** — traveler sheet header carries a `T` glyph; opens the composer for typed traveler input (text is a traveler-side utility, §Adapts-4). Partner side has no keyboard — the local talks, they don't type.
-- **Camera** — traveler sheet header viewfinder glyph, opens the vision flow; results land as normal turn cards. No mode bar anywhere.
+- **Keyboard** — ~~traveler sheet header `T` glyph~~ **removed in v2**: typed input opens from the home dock's `T` utility only (one home per utility; the conversation surface stays conversation-only). Partner side has no keyboard — the local talks, they don't type.
+- **Camera** — ~~traveler sheet header viewfinder glyph~~ **removed in v2**: the camera utility lives in the home dock; results land as normal turn cards. No mode bar anywhere.
 - **Keep ⇄ semantics** — pair swap lives only in the header; both mic labels and the meta line re-label instantly; no navigation.
 
 ## 7 · Accessibility
@@ -132,14 +132,14 @@ Rationale (concepts §Adapts-1): the boards' single orb leaves turn assignment a
 2. Flip mode rotates partner subtree 180° only; header + traveler sheet never rotate.
 3. Mic bar: two labeled zones, labels in each person's language; acid floods only the live zone; resting zone 40%.
 4. Turn card: header mono / body 17 / hairline #E3E3E3 / actions `COPY · PLAY · KEEP`.
-5. Partner panel: display 34→28 floor, acid meta line `…— OFFLINE · 84 MB`, privacy line, flip affordance.
+5. Partner panel: display 34→28 floor, meta line `🔊 84 MB` only (v2), privacy line, flip affordance at top 8 / right 16.
 6. States 2/4/5: acid live zone, one-beat shimmer ≤300 ms, no progress UI, no cancel.
 7. Missing-pack card + disabled-mic sublabel; phrase sheet opens offline.
 8. Tokens: ink #0B0B0B (not pure black), acid #E6FF00 (not the build's #E4FF3C), paper-canvas #F4F4F4, margins 20pt, sheet corner r=24pt.
+9. **Rev-2 additions:** traveler sheet has NO utility icon row (sheet top padding 24pt); all radii from the tokens §0.6 shape law (circle/pill/chip 8/ctl 12/sheet 24); all structural metrics 4pt-grid multiples (tokens §0); 28-state audit of mockup v4 passes zero-overlap / zero-off-grid / acid-only-on-live-mic.
 
 **Open feasibility items carried from concepts §Next-steps-3** (non-blocking; answers fold into rev 2 as they land): rotated container + mic/TTS routing per half + accessibility focus order; elastic/virtualized history under long strings; TTS/partner-mic audio-session policy. Split-mic-bar bindings ride along with Q1.
 
 ## 10 · Next in the hi-fi sequence
 
 Home/solo (orb-dock) spec next, then pack management + offline states (direction-independent deltas from the low-fi wireframes). Light design-system doc (tokens → SwiftUI/Kotlin names) follows once the three surface specs stabilize.
-

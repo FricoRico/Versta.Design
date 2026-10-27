@@ -1,11 +1,13 @@
 ---
 key: hifi-packs-offline
-revision: 5
-updated: 2026-10-27T15:55:25.177Z
+revision: 6
+updated: 2026-10-27T18:03:23.187Z
 source: paperclip
 ---
 
 # Hi-fi spec — pack management + offline states
+
+> **Rev 6 (2026-10-27, second founder revision pass):** contrast + shape/grid compliance. Row actions go high-contrast ink: `GET · nm MB` and `UPDATE · nm MB` are now **ink-filled capsules with paper text** (≈16.9:1; were 1pt outlined); the `GET NOW` secondary goes ink (was mono-gray); confirm/delete secondary buttons get a 1pt ink-text outline (was outline-gray). Acid rule from rev 5 unchanged — acid stays on live/operative state only; idle actions are now *ink*, not acid and not gray. All radii resolve to the shape law ([tokens §0.6](design-system-tokens)); the sheet aligns to the 4pt grid (tokens §0). Host-home surface synced to hifi-home-solo v2 (cell meta line, single SAVED toggle). Mockup v3 is the verified reference.
 
 > **Rev 5 (2026-10-27):** acid semantics extended to live/ready states on this surface by founder decision; confirm-card primary goes acid, ready rows + aggregate gain acid status dots, progress fill goes acid. Failures stay mono. Mockup v2 implements this revision; rev-4 mockup archived. · v1
 
@@ -64,8 +66,8 @@ One row per language, h=72pt, hairline #E3E3E3 top, margins 20pt. Rows sort: nee
 | State | Right cluster (mono) | Tap behavior |
 |---|---|---|
 | `READY` | `● READY · 84 MB` ink-text, 6pt acid dot before the label | Opens row action sheet: `DELETE PACK · FREES 84 MB` / `KEEP` (§5.7) |
-| `READY — UPDATE` | `UPDATE · 12 MB` on a `READY` row | Tap applies the delta update; row briefly shows §4 progress |
-| `DOWNLOADABLE` | `GET · 210 MB` outlined 1pt #A6A6A6 button | Opens the confirm card (§4) |
+| `READY — UPDATE` | `UPDATE · 12 MB` ink-filled capsule on a `READY` row (rev 6) | Tap applies the delta update; row briefly shows §4 progress |
+| `DOWNLOADABLE` | `GET · 210 MB` ink-filled capsule, paper text (rev 6 contrast) | Opens the confirm card (§4) |
 | `QUEUED` | `QUEUED — WI-FI` + small `GET NOW` beneath | `GET NOW` re-opens the confirm card in its mobile-data variant |
 | `DOWNLOADING` | `62% · 130/210 MB` over a 2pt acid progress fill (#E6FF00) on a hairline track | Tap pauses; label flips to `PAUSED — TAP TO RESUME` |
 | `ERROR — STORAGE` | `STORAGE FULL — NEED 210 MB` | Tap opens the row action sheet pre-focused on delete candidates (§5.6) |
@@ -74,7 +76,7 @@ No chevrons, no decorative glyphs. Size is present at every state — **pack-siz
 
 ## 4 · Download lifecycle (the only state machine on this surface)
 
-1. **Confirm card** (tap `GET`) — half-sheet over the pack sheet: `JAPANESE PACK — 210 MB · ~40 S ON WI-FI`, body 15pt copy: what the pack contains in one line (`VOICE + TEXT, BOTH DIRECTIONS`), then two buttons: `DOWNLOAD ON WI-FI` (primary, acid fill #E6FF00 with on-acid #0D0D0D text, ≈17:1 contrast) and `DOWNLOAD NOW — USES MOBILE DATA` (outlined). **Default is Wi-Fi; mobile data is always an explicit second tap, never a preselected option, never silent** (missing-pack honesty rule carried from hifi-conversation §5.10). No checkbox garden, no settings toggle on v1.
+1. **Confirm card** (tap `GET`) — half-sheet over the pack sheet: `JAPANESE PACK — 210 MB · ~40 S ON WI-FI`, body 15pt copy: what the pack contains in one line (`VOICE + TEXT, BOTH DIRECTIONS`), then two buttons: `DOWNLOAD ON WI-FI` (primary, acid fill #E6FF00 with on-acid #0D0D0D text, ≈17:1 contrast) and `DOWNLOAD NOW — USES MOBILE DATA` (1pt ink-text outline, rev 6 — reads as a real button, not a ghost). **Default is Wi-Fi; mobile data is always an explicit second tap, never a preselected option, never silent** (missing-pack honesty rule carried from hifi-conversation §5.10). No checkbox garden, no settings toggle on v1.
 2. **Queued** — row enters `QUEUED — WI-FI`. Wi-Fi arrival starts the download automatically, no toast, no banner (ambient discipline — §6.1).
 3. **Downloading** — progress cluster per §3; downloads continue if the sheet is dismissed (background), surfaced ambiently via the header sublabel (§6.3). Network loss mid-download: the row flips to `PAUSED — RESUMES ON WI-FI`; it resumes on its own. The row *is* the notification.
 4. **Commit** — on 100% the row plays the one-beat shimmer (200–300 ms; the system's only transition theater) and lands as `READY · 210 MB` with the final on-disk size. No celebratory modal.
@@ -123,7 +125,7 @@ No chevrons, no decorative glyphs. Size is present at every state — **pack-siz
 
 1. Sheet pins below the 44pt header (top edge y=44), corners r=24, grabber 36×4 at 12pt, `DONE` top-right 44pt hit; header identical to both sibling surfaces with zero offset.
 2. Row anatomy: h=72, hairline #E3E3E3 top, native name 17pt body over mono 10.5 caps caption, right cluster 44pt hit with size figure present in **every** state.
-3. The six right-cluster states render per §3 table, incl. `QUEUED — WI-FI` + `GET NOW`, and the 2pt ink progress bar with `62% · 130/210 MB`.
+3. The six right-cluster states render per §3 table, incl. `QUEUED — WI-FI` + `GET NOW` (ink-text), and the 2pt progress bar with `62% · 130/210 MB`.
 4. Confirm card: two buttons in the fixed order (Wi-Fi primary ink fill, mobile-data outlined), size + Wi-Fi ETA in mono; no preselected data option.
 5. Storage-full: mono banner row pinned top (`STORAGE FULL — FREE 210 MB TO CONTINUE`), no modal, no red; delete action sheet offers `DELETE PACK · FREES 84 MB` / `KEEP` exactly.
 6. Missing-pack card matches §6.2 anatomy verbatim on both host surfaces; affected capture affordance + header carry the `PACK NEEDED` sublabel; header still measures 44pt.

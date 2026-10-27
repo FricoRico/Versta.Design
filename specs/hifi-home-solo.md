@@ -1,13 +1,13 @@
 ---
-title: "Untitled"
-paperclip_issue: NEU-57
-document_key: hifi-home-solo
-revision: 4
-revision_id: 6dc64f0c-0080-41d0-adb3-c14a316e9eaa
-exported: 2026-10-27
+key: hifi-home-solo
+revision: 5
+updated: 2026-10-27T18:02:56.900Z
+source: paperclip
 ---
 
-# Hi-fi spec — home/solo (orb-dock) · v1
+# Hi-fi spec — home/solo (orb-dock) · v2
+
+> **Rev 2 (2026-10-27, second founder revision pass):** declutter + placement consistency + grid/shape compliance. Cells lose the per-row replay glyph (replay lives on the show-card the cell opens); the `KEEP` tag moves *inline into the timestamp line* (one right-edge meta line per cell, no trailing cluster fighting the timestamp); the `RECENT` header drops the redundant `ALL` chip — a single `SAVED` toggle chip does the filter. All radii resolve to the shape law ([tokens §0.6](design-system-tokens)); placement follows the binding placement law (tokens §0.7) — dock owns the bottom 84pt, utilities never move, the row above the dock holds one tenant (FACE TO FACE bar ⇄ capture cluster). The whole surface aligns to the 4pt grid (tokens §0) — mockup v2 is the verified reference.
 
 **What this is:** the pixel-level spec for the **home/solo surface** — the not-in-conversation state of the app — in the reconciled ink/acid language. Sibling spec: [hifi-conversation](hifi-conversation) v1 (the ink-split partner surface). Binding sources: [concepts doc](concepts) rev 4 (§Adapts-5 is this surface's charter; F1–F3/F5 fixes), [design language inventory](design-language) v1 (measured tokens), ADR-0001 rev 3 runtime constraints (no cancel anywhere; one-beat shimmer is the only transition theater).
 
@@ -25,7 +25,7 @@ Verification notes for Maya live in §9.
 │──────────────────────────────│
 │  empty state copy, 17pt      │  ← teaches the exchange (F5 fix)
 │           or                 │
-│  ▸ RECENT  [ALL|SAVED]       │  ← single history door (three-door fix)
+│  RECENT            [SAVED]   │  ← single history door · one toggle (three-door fix)
 │  ──────────────────────────  │
 │  paired-phrase cells …       │
 │                              │
@@ -68,14 +68,14 @@ While the orb is live, `T` and camera dim to 40% (mirrors the resting-zone behav
 
 ## 4 · Recents cells + the single history door
 
-**RECENT header** — `▸ RECENT` mono 11pt section label; trailing two filter chips `ALL` / `SAVED` (mono 10.5pt, outlined 1pt #A6A6A6, 32pt h, selected chip fills ink with paper text). **This collapses the build's three history doors (recents / saved / conversation log) into one list with one filter** (teardown F3). `SAVED` == trip notebook content fed by `KEEP` actions from both surfaces (concepts §Carries-6).
+**RECENT header** — `RECENT` mono 11pt section label; **one trailing toggle chip `SAVED`** (mono 10.5pt capsule, outlined 1pt #A6A6A6, 32pt h, on-state fills ink with paper text; off = the full list). ~~Two chips `ALL`/`SAVED`~~ simplified in v2: `ALL` was the visible-default restating itself. **This collapses the build's three history doors (recents / saved / conversation log) into one list with one filter** (teardown F3). `SAVED` == trip notebook content fed by `KEEP` actions from both surfaces (concepts §Carries-6).
 
 **Paired-phrase cell** (per boards `home-orb-dock`), h auto 64–96pt:
 - Hairline #E3E3E3 top; timestamp right in mono 10.5pt (`19:04`).
 - Traveler original: body 15pt ink-text (list scale, one line, truncates).
 - Partner line: display face 17pt (list scale, one line, truncates — full display lives on the surface it belongs to via tap).
-- Trailing speaker glyph 20pt replays partner TTS (offline-safe); hit ≥44pt.
-- Saved cells carry a `KEEP` chip (mono 9.5pt, ink fill, paper text) before the speaker glyph.
+- Right edge carries exactly one meta line: `[KEEP] 19:04` — saved cells prepend the `KEEP` tag (mono 9.5pt, ink fill, paper text, r-chip 8pt) inline before the timestamp. Nothing else on the right edge (v2 placement law; the prior trailing cluster is gone).
+- ~~Trailing speaker glyph 20pt replays partner TTS~~ **removed in v2** — replay is a show-card action; the cell opens the card, the card replays. One replay door, not two.
 
 **Cell tap →** inline expansion is *rejected* — tapping a cell opens that line as a **show-card** (fullscreen ink canvas, 44pt display, replay, `DONE`), the identical escalation component as hifi-conversation §5.8. **One show-card component across both surfaces**; engineering builds it once. Exit returns to the list's exact scroll offset.
 
@@ -85,8 +85,8 @@ While the orb is live, `T` and camera dim to 40% (mirrors the resting-zone behav
 
 1. **Fresh install / empty (resting)** — content zone carries the exchange-teaching empty state (F5 fix): body 17pt, ink-text, centered in the upper third: `Hold the button. Talk. It translates — no signal needed.` Second line, mono-gray 11pt: `SPEECH STAYS ON YOUR PHONE`. The `FACE TO FACE` pill reads as the obvious next step once a partner is present. **Never teaches the keyboard** (the build's empty state teaches typing; that inversion is the bug).
 2. **Listening (solo)** — orb stays acid, mic glyph swaps to the stop square; sparse waveform ticks (design-language §3 motif) render above the dock; live partial transcript appears as an in-progress cell at the top of the zone, body 17pt at 60% ink. T and camera at 40% (§3).
-3. **Commit → quick result** — release: one-beat shimmer (200–300 ms) on the committing cell, then it completes as a paired-phrase cell with the partner line in list scale. **No spinner, no progress, no cancel** (ADR-0001). TTS does **not** auto-play on home — solo capture is often private (checking a phrase for yourself); replay is the trailing speaker glyph. Deliberate asymmetry with the conversation surface (where TTS auto-plays per hifi-conversation §5.5): home assumes one listener, the split surface assumes two.
-4. **Recents populated** — the resting face after first use; header chips default `ALL`.
+3. **Commit → quick result** — release: one-beat shimmer (200–300 ms) on the committing cell, then it completes as a paired-phrase cell with the partner line in list scale. **No spinner, no progress, no cancel** (ADR-0001). TTS does **not** auto-play on home — solo capture is often private (checking a phrase for yourself); replay lives on the show-card (v2). Deliberate asymmetry with the conversation surface (where TTS auto-plays per hifi-conversation §5.5): home assumes one listener, the split surface assumes two.
+4. **Recents populated** — the resting face after first use; the `SAVED` toggle is off.
 5. **Entering conversation** — `FACE TO FACE` tap: 200 ms crossfade to the ink-split surface (hifi-conversation §1); header never moves. Recents carry over as conversation history — **one conversation log under both surfaces** (the third-door fix applied to data, not just chrome).
 6. **Missing pack** — the header's language meta line gains a mono sublabel `PACK NEEDED` on the affected side; the orb's glyph stays armed but commit produces the inline pack card (identical component to hifi-conversation §5.10: honest cost, `SCHEDULE DOWNLOAD` / `USE SAVED PHRASES`, never an unsolicited mobile-data download). Home never dead-ends.
 7. **No network / airplane** — identical UI to every resting state; the pill already says offline. Zero change (the product's core promise).
@@ -122,7 +122,7 @@ While the orb is live, `T` and camera dim to 40% (mirrors the resting-zone behav
 1. Header identical to conversation spec §1 construction (44pt, ⇄ / pair / OFFLINE pill); identical across both surfaces, no offset on surface switch.
 2. Dock = three items, one primary: acid orb ø56pt center / `T` and camera 24pt glyphs ≥44pt hit / no visible bar / 84pt bottom region. No Conversation cue, no Saved cue in the dock.
 3. Orb live: floods acid, glyph→stop, ticks above dock, partial cell 60% ink, T/camera at 40%, mono hint blocks utility taps mid-capture.
-4. Recents: hairline cells, traveler 15pt body + partner 17pt display (one line each, truncated), mono timestamp right, trailing speaker glyph ≥44pt; `KEEP` chip on saved cells; `ALL|SAVED` chips in the header.
+4. Recents: hairline cells, traveler 15pt body + partner 17pt display (one line each, truncated), meta line right = `[KEEP?] timestamp` only; single `SAVED` toggle chip in the header.
 5. Cell tap → shared show-card (fullscreen ink, 44pt, replay, `DONE`); exit restores exact scroll offset.
 6. Fresh install: exchange-teaching empty state (17pt + mono privacy line); no keyboard-first copy anywhere.
 7. Missing pack: mono `PACK NEEDED` sublabel in header + inline pack card on commit (honest cost, two choices, no auto-download).
@@ -136,4 +136,3 @@ While the orb is live, `T` and camera dim to 40% (mirrors the resting-zone behav
 3. Light design-system doc (tokens → SwiftUI/Kotlin names) once the three surface specs stabilize.
 
 *Rev 1 skeleton (19:55) · rev 2 adds §3–4 · rev 3 adds §5–6 · rev 4 completes §7–10. Self-review against concepts rev 4 bindings and design-language tokens: no contradictions found.*
-

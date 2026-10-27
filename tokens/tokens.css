@@ -61,4 +61,26 @@
   --neurora-motion-shimmer-max: 300ms;
   --neurora-motion-sheet-max: 250ms;
   --neurora-motion-crossfade: 200ms;
+
+  /* — Grid (rev 4; see spec §0) — */
+  --neurora-grid-unit: 4px;             /* every structural metric is a multiple */
+  --neurora-grid-margin: 20px;          /* = screen-margin; content column 350 */
+  --neurora-grid-content: 350px;
+  --neurora-grid-columns: 6;            /* advisory, 12pt gutters across 350 */
+  --neurora-grid-col-gap: 12px;
+  /* spacing scale: 4 8 12 16 20 24 32 40 48 — nothing off-scale */
+
+  /* — Shape (rev 4; five shapes only, see spec §0.6) — */
+  --neurora-radius-circle: 50%;         /* orb, replay, status dots */
+  --neurora-radius-pill: 999px;         /* capsules/bar targets, grabbers, progress */
+  --neurora-radius-chip: 8px;           /* non-interactive inline tags (IMAGE, KEEP) */
+  --neurora-radius-ctl: 12px;           /* rectangular controls >=40pt tall */
+  --neurora-radius-sheet: 24px;         /* bottom sheets/cards, top corners */
+
+  /* — Z-scale (rev 4) — */
+  --neurora-z-content: 0;
+  --neurora-z-chrome: 10;
+  --neurora-z-scrim: 14;
+  --neurora-z-sheet: 15;
+  --neurora-z-modal: 16;
 }

@@ -1,17 +1,51 @@
 ---
 key: design-system-tokens
-revision: 3
-updated: 2026-10-27T15:55:35.010Z
+revision: 4
+updated: 2026-10-27T18:03:29.227Z
 source: paperclip
 ---
 
 # Design system tokens — ink/acid v1
+
+> **Rev 4 (2026-10-27):** **§0 grid & shape system added (founder order)** — one 4pt-unit layout grid and one five-shape radius law now bind every surface; the three mockups were re-aligned to it and the verification harness asserts it. §1 acid rule unchanged.
 
 > **Rev 3 (2026-10-27):** `acid` semantics extended from capture-only to live/ready states (founder decision on NEU-57 review). Pack-surface bindings: `rdot` status dots, progress fill, confirm primary. Error-color ban unchanged. Packs spec rev 5 + mockup v2 carry the geometry.
 
 **What this is:** the engineering bridge for the accepted direction. Every measured value from the [design-language inventory](#document-design-language) and the three hi-fi specs ([conversation](#document-hifi-conversation) · [home/solo](#document-hifi-home-solo) · [packs](#document-hifi-packs-offline)) consolidated into named tokens with their SwiftUI and Compose counterparts. This doc is normative: where a spec and this table ever disagree, comment here — one source of truth per value.
 
 **Naming:** Swift names assume a `NeuroraTheme` enum namespace; Compose names assume a `NeuroraTheme.kt` object + `MaterialTheme` mapping where noted. Semantic-first: code refers to roles (`surface.partner`), never raw hex.
+
+## 0 · The grid (binding — rev 4, founder order 2026-10-27)
+
+One layout system for every surface. Specs and mockups align to it; the headless verification harness asserts it, so a violation fails verification, loudly.
+
+**0.1 Base unit — 4pt.** Every *structural* metric — positions, sizes, paddings, gaps, row heights, offsets — is a multiple of 4pt. Type metrics (font sizes, line heights) are exempt; the boxes that hold type are not.
+
+**0.2 Frame & margins.** Reference frame 390×844pt. Page margins **20pt** → content column **350pt**. Bottom sheets span the full frame width; the 20pt margins apply inside them.
+
+**0.3 Spacing scale.** `4 · 8 · 12 · 16 · 20 · 24 · 32 · 40 · 48`. Gaps, paddings and inter-element offsets come from this scale only — nothing off-scale.
+
+**0.4 Columns (advisory).** The 350pt content column carries a **6-column grid with 12pt gutters** (column width 48⅓pt — fractional by construction; the binding laws are the unit and the margins). Block widths snap to column spans where practical: 1-col ≈48, 2-col ≈109, 3-col ≈170, 6-col = 350. Equal-split groups (e.g. a two-button row) split the container evenly with an on-scale gap.
+
+**0.5 Vertical rhythm.** Rows and fixed regions use on-scale heights: `24 / 32 / 44 / 48 / 56 / 64 / 72 / 84`. Header 44, dock 84, orb 56, mic bar 64, pack row 72, hit floors 44/48 — all already conform.
+
+**0.6 Shape law — five shapes, no others.** Radius is semantic, never decorative variance:
+
+| Shape token | Value | Rule |
+|---|---|---|
+| `circle` | 50% | Equal-dimension indicators and buttons: capture orb, replay button, status dots |
+| `pill` | 999pt (full) | Single-line capsules/bar targets: status pills, filter chips, category chips, `GET`/`UPDATE`/row actions, `FACE TO FACE` bar, sheet grabbers, progress bars |
+| `r-chip` | 8pt | Non-interactive inline tags inside text flow: `IMAGE`, `KEEP` |
+| `r-ctl` | 12pt | Rectangular controls ≥40pt tall: card/sheet buttons, text field |
+| `r-sheet` | 24pt | Bottom sheets and bottom-anchored cards (top corners only) |
+
+**0.7 Placement law (rev 4).** Actions live in a small set of fixed slots so nothing "wanders" between states:
+- **Bottom 84pt = the capture dock** (home/solo); the orb is dead-center, utilities flank it — never displaced by state.
+- **The row immediately above the dock (y 96–148 from bottom) holds at most one element**: the `FACE TO FACE` entry bar at rest, the capture cluster (ticks + hint) during capture. One slot, one tenant.
+- **Two-button rows: primary on the right. Single-action sheets: full-width button at the panel bottom. Fullscreen cards: exit top-right (`DONE`), primary action bottom-center.**
+- **Meta voice right edge:** timestamps right-aligned on their own top line; no second right-edge element fights them.
+
+**0.8 Z-scale.** `0` content · `10` sticky chrome/coach bubble · `14` scrim · `15` sheet · `16` modal card. No arbitrary z-index.
 
 ## 1 · Color tokens (normative hex + platform constants)
 
