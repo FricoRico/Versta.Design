@@ -1,0 +1,64 @@
+/* Neurora design tokens — ink/acid v1
+   Source: Paperclip NEU-57, document `design-system-tokens` rev 2
+   Exported 2026-10-27. Units: pt == dp == sp; px here are the CSS @1x equivalent for mockups/web.
+   Normative: see specs/design-system-tokens.md — this file is a machine-readable mirror, not the source. */
+
+:root {
+  /* — Color (sRGB) — */
+  --neurora-acid: #E6FF00;            /* live capture only, one per surface */
+  --neurora-on-acid: #0D0D0D;
+  --neurora-ink: #0B0B0B;             /* intentionally not pure black (OLED smear) */
+  --neurora-paper: #FFFFFF;
+  --neurora-paper-canvas: #F4F4F4;
+  --neurora-ink-text: #0D0D0D;
+  --neurora-mono-gray: #5D5D5D;       /* quiet-copy floor, >=4.5:1 on paper */
+  --neurora-mono-gray-ink: rgba(255, 255, 255, 0.55);
+  --neurora-hairline-paper: #E3E3E3;
+  --neurora-hairline-ink: rgba(255, 255, 255, 0.14);
+  --neurora-outline: #A6A6A6;
+  --neurora-acid-dim: #92A202;
+
+  /* — Type (roles; faces resolve per platform, see spec §2/§6) — */
+  --neurora-display-size: 34px;
+  --neurora-display-floor: 28px;      /* hard floor, Dynamic Type does not push lower */
+  --neurora-display-list-size: 17px;
+  --neurora-display-card-size: 20px;
+  --neurora-showcard-size: 44px;
+  --neurora-body-size: 17px;
+  --neurora-body-line-height: 1.35;
+  --neurora-body-list-size: 15px;
+  --neurora-mono-size: 11px;          /* uppercase at string layer */
+  --neurora-mono-small-size: 10.5px;
+  --neurora-mono-chip-size: 9.5px;
+  --neurora-mono-tracking: 0.085em;   /* +8.5% at every mono size */
+  --neurora-mono-locale-allowance: 1.45;
+
+  /* — Geometry — */
+  --neurora-header-height: 44px;      /* never moves; pack sheet pins at y=44 */
+  --neurora-screen-margin: 20px;
+  --neurora-sheet-corner: 24px;
+  --neurora-grabber-width: 36px;
+  --neurora-grabber-height: 4px;
+  --neurora-grabber-top-offset: 12px;
+  --neurora-grabber-hit-zone: 28px;
+  --neurora-hit-min: 44px;
+  --neurora-hit-capture: 48px;
+  --neurora-orb-size: 56px;
+  --neurora-mic-bar-height: 64px;     /* straddles the split seam */
+  --neurora-dock-height: 84px;
+  --neurora-divider-hit: 28px;
+  /* divider snap points: 30% / 54% / 78%; partner panel resting share: 46% */
+  --neurora-partner-share: 46%;
+  --neurora-pack-row-height: 72px;
+  --neurora-cell-min: 64px;
+  --neurora-cell-max: 96px;
+  --neurora-pill-status: 24px;
+  --neurora-pill-filter: 32px;
+  --neurora-pill-facetoface: 44px;
+  --neurora-progress-height: 2px;
+
+  /* — Motion (ceilings, ADR-0001) — */
+  --neurora-motion-shimmer-max: 300ms;
+  --neurora-motion-sheet-max: 250ms;
+  --neurora-motion-crossfade: 200ms;
+}

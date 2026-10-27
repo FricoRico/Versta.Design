@@ -1,0 +1,35 @@
+{
+  "export": {
+    "issue": "NEU-57",
+    "issueId": "f90d27b9-2e48-4351-b6e7-410d803ce0d1",
+    "exportedAt": "2026-10-27",
+    "exportedBy": "Jonas Ferreira (agent e395627e-1037-458f-982e-df5313cf03ef)",
+    "policy": "Mirrors accepted/current state only; WIP stays on the issue thread."
+  },
+  "documents": {
+    "specs/teardown.md":               { "documentKey": "teardown",               "revision": 1, "revisionId": "73fb674c-c437-484a-9da4-4a47d85d55be" },
+    "specs/journey-map.md":            { "documentKey": "journey-map",            "revision": 1, "revisionId": "23fccb74-5f6b-42ea-8e2b-ea921f53016b" },
+    "specs/concepts.md":               { "documentKey": "concepts",               "revision": 1, "revisionId": "a62b70fa-213a-4e44-8847-5783f9f88399" },
+    "specs/design-language.md":        { "documentKey": "design-language",        "revision": 1, "revisionId": "349826d3-4999-491c-8b18-2c7bb229e18e" },
+    "specs/design-system-tokens.md":   { "documentKey": "design-system-tokens",   "revision": 2, "revisionId": "6ea8016a-2312-4419-9541-27032cd73c8b" },
+    "specs/hifi-conversation.md":      { "documentKey": "hifi-conversation",      "revision": 1, "revisionId": "d7debda7-dbfd-4c5e-b98e-d74e58316617" },
+    "specs/hifi-home-solo.md":         { "documentKey": "hifi-home-solo",         "revision": 4, "revisionId": "6dc64f0c-0080-41d0-adb3-c14a316e9eaa" },
+    "specs/hifi-packs-offline.md":     { "documentKey": "hifi-packs-offline",     "revision": 4, "revisionId": "c42f53dc-2ee6-4d8c-9713-5beed5c2d9ac" },
+    "verification/facetoface-mockup-v2.md": { "documentKey": "facetoface-mockup-v2", "revision": 3, "revisionId": "b3fe5862-28ed-4cfe-ba13-bfba26085e8e" },
+    "verification/home-solo-mockup-v1.md":  { "documentKey": "home-solo-mockup-v1",  "revision": 1, "revisionId": "99c5bcb7-06f5-47d7-bd0b-ac39c2c163ad" },
+    "verification/packs-mockup-v1.md":      { "documentKey": "packs-mockup-v1",      "revision": 1, "revisionId": "a1ea3a2f-e0ab-4b73-8363-ef3661a5fa0f" }
+  },
+  "attachments": {
+    "mockups/neurora-facetoface-mockup-v2.html":          { "attachmentId": "3c05498d-6ccd-4614-a828-e1258217ef4b", "sha256": "ca13e9658a8fefae3869d40f52ca5c078cd1e6e6f498af6a00dbbff611498208" },
+    "state-sheets/neurora-facetoface-v2-state-sheet.png": { "attachmentId": "bbd2c075-2547-4fd8-aaa7-a9ab8564a57a", "sha256": "16170437c90cd4a571d79435cfa9f39077b1917dab7d5df04abfe979b571b147" },
+    "mockups/neurora-home-solo-mockup-v1.html":           { "attachmentId": "91e1d258-53b0-4ee0-a880-b72cfd23b5ed", "originalFilename": "neurora-home-solo-final.html", "sha256": "0d7c6fa226feac46a2f65d41a8d27077be242df4f3c3554e18594d962bb8c6ba" },
+    "state-sheets/neurora-home-solo-state-sheet.png":     { "attachmentId": "2ed4e127-e852-4c8a-8433-b393c6b98321", "sha256": "1392cccc515ad38321ad52d06fa8b52ff34d0739eed800227b8745a7a1ee625b" },
+    "mockups/neurora-packs-mockup-v1.html":               { "attachmentId": "bde05d22-08a6-4b92-a0ac-ea1f91bda2bf", "sha256": "1fe1706ab2ea4853ae4d752033fa9d3de417d0bb7ad78b9bc62bfba84ca619f6" },
+    "state-sheets/neurora-packs-state-sheet-v1.png":      { "attachmentId": "36beece3-ded1-4110-969c-19ee14e69ae2", "sha256": "cc9eb7e1c258dc385c6d6732ce9df3efb7c9dc57499ac06cf15c2344856dc57b" },
+    "mockups/archive/neurora-facetoface-mockup-v1.html":  { "attachmentId": "8c15859e-9f17-498b-9e3b-14047faa876d", "sha256": "594779c6d1b71496cff1877754e7a5491bea78dd030e681bb94cab0c03e4cb92", "note": "Superseded; kept for history." }
+  },
+  "notMirrored": [
+    "Founder-supplied brand boards + current-build captures (2026-10-14; user-owned uploads, remain on the issue)",
+    "Five exploratory wireframes (2026-10-12; superseded by concepts doc + verified mockups)"
+  ]
+}

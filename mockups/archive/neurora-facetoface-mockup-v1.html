@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neurora — Face-to-Face conversation surface · mockup v1 (NEU-57)</title>
+<style>
+  :root{
+    --acid:#E6FF00; --on-acid:#0D0D0D; --acid-dim:#92A202;
+    --ink:#0B0B0B; --paper:#FFFFFF; --canvas:#F4F4F4;
+    --ink-text:#0D0D0D; --mono-gray:#5D5D5D;
+    --hair-paper:#E3E3E3; --outline:#A6A6A6;
+    --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+    --body:-apple-system,'Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0}
+  body{background:#DDDCDC;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:40px 16px;font-family:var(--body);color:#333}
+
+  /* ---------- preview chrome (not part of the design) ---------- */
+  .chrome{max-width:560px;text-align:center;margin-bottom:22px}
+  .chrome h1{font-size:15px;letter-spacing:.02em;margin-bottom:6px}
+  .chrome p{font-size:12px;line-height:1.5;color:#666}
+  .controls{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:0 0 26px;max-width:640px}
+  .controls button{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+    background:#fff;border:1px solid #bbb;border-radius:999px;padding:8px 14px;cursor:pointer;color:#222}
+  .controls button.on{background:var(--ink);color:var(--acid);border-color:var(--ink)}
+
+  /* ---------- phone frame ---------- */
+  .phone{width:390px;height:844px;background:var(--canvas);border-radius:48px;overflow:hidden;position:relative;
+    box-shadow:0 0 0 10px #1a1a1a,0 30px 60px rgba(0,0,0,.35);display:flex;flex-direction:column}
+
+  /* status header — 44pt */
+  .hdr{height:44px;flex:0 0 44px;background:var(--paper);display:flex;align-items:center;padding:0 20px;gap:12px;z-index:6}
+  .hdr .swap{font-size:20px;line-height:1;width:44px;height:44px;display:flex;align-items:center;justify-content:flex-start;color:var(--ink-text)}
+  .hdr .pair{flex:1;text-align:center;font-family:var(--mono);font-size:11px;letter-spacing:.085em;text-transform:uppercase;color:var(--ink-text);white-space:nowrap}
+  .pill{border:1px solid var(--outline);border-radius:999px;height:24px;padding:0 10px;display:flex;align-items:center;
+    font-family:var(--mono);font-size:11px;letter-spacing:.085em;text-transform:uppercase;color:var(--ink-text)}
+
+  .stage{flex:1;position:relative}
+
+  /* partner panel — ink, 46% share */
+  .partner{position:absolute;top:0;left:0;right:0;height:46%;background:var(--ink);color:#fff}
+  .partner-inner{position:absolute;inset:0;padding:20px;display:flex;flex-direction:column;justify-content:flex-end;
+    transition:transform .2s ease}
+  .partner.flipped .partner-inner{transform:rotate(180deg)}
+  .flipbtn{position:absolute;top:14px;right:14px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;
+    color:rgba(255,255,255,.6);font-size:22px;background:none;border:none;cursor:pointer}
+  .display{font-weight:800;font-size:34px;line-height:1.12;letter-spacing:.005em;margin-bottom:14px;max-width:92%}
+  .display.small{font-size:28px}
+  .display.partial{opacity:.6;font-size:28px}
+  .meta{font-family:var(--mono);font-size:11px;letter-spacing:.085em;text-transform:uppercase;color:var(--acid);margin-bottom:8px}
+  .privacy{font-family:var(--mono);font-size:10px;letter-spacing:.085em;text-transform:uppercase;color:var(--mono-gray)}
+  .ticks{display:flex;gap:5px;align-items:flex-end;height:16px;margin:2px 0 10px}
+  .ticks i{width:2px;background:rgba(255,255,255,.35);display:block;animation:t 1s infinite ease-in-out}
+  .ticks i:nth-child(1){height:6px}.ticks i:nth-child(2){height:14px;animation-delay:.15s}
+  .ticks i:nth-child(3){height:9px;animation-delay:.3s}.ticks i:nth-child(4){height:15px;animation-delay:.45s}
+  .ticks i:nth-child(5){height:7px;animation-delay:.6s}
+  @keyframes t{50%{transform:scaleY(.4)}}
+  .hidden{display:none!important}
+
+  /* traveler sheet */
+  .sheet{position:absolute;left:0;right:0;bottom:0;top:calc(46% + 32px);background:var(--paper);
+    border-radius:24px 24px 0 0;padding:20px 20px 14px;overflow:hidden;z-index:2}
+  .sheet-tools{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+  .sheet-tools .t{font-family:var(--mono);font-size:15px;border:1px solid var(--outline);border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;color:var(--ink-text)}
+  .sheet-tools .r{font-family:var(--mono);font-size:10.5px;letter-spacing:.085em;color:var(--mono-gray);text-transform:uppercase}
+  .empty{font-size:17px;line-height:1.45;color:var(--mono-gray);max-width:26ch;padding:18px 0}
+  .card{border:1px solid var(--hair-paper);border-radius:16px;padding:14px 16px;margin-bottom:12px;background:var(--paper)}
+  .card h3{font-family:var(--mono);font-size:10.5px;letter-spacing:.085em;text-transform:uppercase;color:var(--mono-gray);font-weight:400;margin-bottom:8px}
+  .card .you{font-size:17px;line-height:1.35;color:var(--ink-text)}
+  .card .you.partial{opacity:.6}
+  .card hr{border:none;border-top:1px solid var(--hair-paper);margin:10px 0}
+  .card .them{font-weight:800;font-size:20px;line-height:1.2;color:var(--ink-text)}
+  .card .act{font-family:var(--mono);font-size:11px;letter-spacing:.085em;text-transform:uppercase;color:var(--ink-text);margin-top:10px;
+    display:flex;gap:18px}
+  .pack{border:1px solid var(--hair-paper);border-radius:16px;padding:14px 16px;background:var(--paper)}
+  .pack h3{font-family:var(--mono);font-size:11px;letter-spacing:.085em;text-transform:uppercase;color:var(--ink-text);margin-bottom:10px}
+  .pack .btns{display:flex;gap:10px}
+  .pack .btns span{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--outline);border-radius:999px;padding:8px 10px}
+
+  /* split mic bar — 64pt, straddles the seam */
+  .micbar{position:absolute;left:0;right:0;top:calc(46% - 32px);height:64px;display:flex;z-index:3}
+  .zone{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+    font-family:var(--mono);font-size:11px;letter-spacing:.085em;text-transform:uppercase;cursor:pointer;transition:opacity .15s}
+  .zone .sub{font-size:9px;color:var(--mono-gray)}
+  .zone.traveler{background:var(--paper);border-top:1px solid var(--outline);color:var(--ink-text)}
+  .zone.partner{background:var(--ink);color:var(--paper)}
+  .zone.live{background:var(--acid);color:var(--on-acid);border-top-color:var(--acid)}
+  .zone.dim{opacity:.4}
+  .grip{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);width:36px;height:4px;border-radius:2px;
+    background:rgba(255,255,255,.55);z-index:4;mix-blend-mode:difference}
+
+  /* show-card overlay */
+  .showcard{position:absolute;inset:0;background:var(--ink);z-index:10;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;padding:24px}
+  .showcard .done{position:absolute;top:14px;right:20px;font-family:var(--mono);font-size:11px;letter-spacing:.085em;color:#fff;
+    text-transform:uppercase;background:none;border:none;cursor:pointer;padding:12px}
+  .showcard .big{color:#fff;font-weight:800;font-size:44px;line-height:1.15;text-align:center;margin-bottom:30px}
+  .showcard .replay{width:64px;height:64px;border-radius:50%;background:var(--acid);color:var(--on-acid);border:none;
+    font-size:22px;cursor:pointer}
+
+  /* quick-phrase sheet overlay */
+  .phrases{position:absolute;left:0;right:0;bottom:0;height:52%;background:var(--paper);border-radius:24px 24px 0 0;
+    z-index:9;padding:16px 20px;box-shadow:0 -8px 30px rgba(0,0,0,.18);overflow:hidden}
+  .phrases .grab{width:36px;height:4px;border-radius:2px;background:#C9C9C9;margin:0 auto 14px}
+  .phrases .groups{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+  .phrases .groups b{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;font-weight:400;
+    border:1px solid var(--outline);border-radius:999px;padding:7px 11px;color:var(--ink-text)}
+  .phrases .groups b.sel{background:var(--ink);color:var(--acid);border-color:var(--ink)}
+  .phrases .row{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:11px 0;border-top:1px solid var(--hair-paper)}
+  .phrases .row .ja{font-weight:800;font-size:18px;color:var(--ink-text);white-space:nowrap}
+  .phrases .row .en{font-size:13px;color:var(--mono-gray);text-align:right}
+</style>
+</head>
+<body>
+
+<div class="chrome">
+  <h1>Neurora — Face-to-Face conversation surface · hi-fi mockup v1</h1>
+  <p>Interactive preview of the recommended direction (NEU-57, spec “hifi-conversation” v1).
+  Tokens are to-spec: acid <b>#E6FF00</b> is reserved for the live mic only, ink <b>#0B0B0B</b> is the partner’s half,
+  sheet corners r=24, margins 20. System fonts stand in for the brand faces. The top half faces the person across
+  the counter — try <b>Flip 180°</b>.</p>
+</div>
+
+<div class="controls" id="controls">
+  <button data-s="ready" class="on">Ready</button>
+  <button data-s="you">You speak (EN)</button>
+  <button data-s="partner">Partner speaks (JA)</button>
+  <button data-s="result">Result + TTS</button>
+  <button data-s="pack">Missing pack</button>
+  <button id="flip">Flip 180°</button>
+  <button id="show">Show-card</button>
+  <button id="phr">Quick phrases</button>
+</div>
+
+<div class="phone" id="phone">
+  <div class="hdr">
+    <span class="swap">⇄</span>
+    <span class="pair" id="pair">English ⇄ Japanese</span>
+    <span class="pill">Offline</span>
+  </div>
+
+  <div class="stage">
+    <div class="partner" id="partner">
+      <div class="partner-inner">
+        <button class="flipbtn" id="flipbtn" title="Flip partner panel">⟳</button>
+        <div class="ticks hidden" id="ticks"><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="display" id="display">何かお手伝いしましょうか？</div>
+        <div class="meta" id="meta">Japanese — Offline · 84 MB&nbsp;&nbsp;🔊</div>
+        <div class="privacy">—— Speech stays on your phone</div>
+      </div>
+    </div>
+
+    <div class="sheet" id="sheet"></div>
+
+    <div class="micbar">
+      <div class="zone traveler" id="zYou"><span>🎙 Speak — English</span><span class="sub" id="subYou"></span></div>
+      <div class="zone partner" id="zPartner"><span>🎙 話す — 日本語</span><span class="sub" id="subPartner"></span></div>
+    </div>
+    <div class="grip"></div>
+
+    <div class="phrases hidden" id="phrases">
+      <div class="grab"></div>
+      <div class="groups"><b class="sel">Greetings</b><b>Prices</b><b>Directions</b><b>Allergies</b><b>Emergency</b></div>
+      <div class="row"><span class="ja">すみません</span><span class="en">Excuse me</span></div>
+      <div class="row"><span class="ja">ありがとうございます</span><span class="en">Thank you</span></div>
+      <div class="row"><span class="ja">いくらですか？</span><span class="en">How much is this?</span></div>
+      <div class="row"><span class="ja">駅はどこですか？</span><span class="en">Where is the station?</span></div>
+    </div>
+
+    <div class="showcard hidden" id="showcard">
+      <button class="done" id="done">Done</button>
+      <div class="big">駅はまっすぐ進んで、<br>左です。</div>
+      <button class="replay">▶</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const sheet = $('sheet'), display = $('display'), ticks = $('ticks'),
+      zYou = $('zYou'), zPartner = $('zPartner'),
+      subYou = $('subYou'), subPartner = $('subPartner');
+
+const cardHistory = `
+  <div class="card">
+    <h3>English — You · 19:04</h3>
+    <p class="you">Excuse me — where is the nearest station?</p>
+    <hr>
+    <p class="them">すみません、一番近い駅はどこですか？</p>
+    <div class="act"><span>Copy</span><span>◉ Play</span><span>Keep</span></div>
+  </div>
+  <div class="card">
+    <h3>Japanese — Partner · 19:03</h3>
+    <p class="you">The station is straight ahead, on your left.</p>
+    <hr>
+    <p class="them">駅はまっすぐ進んで、左です。</p>
+    <div class="act"><span>Copy</span><span>Play</span><span>Keep</span></div>
+  </div>`;
+
+const shell = inner => `
+  <div class="sheet-tools"><span class="t">T</span><span class="r">Recent</span><span class="t">⌖</span></div>${inner}`;
+
+const states = {
+  ready(){
+    sheet.innerHTML = shell(`<p class="empty">Hold a mic. Talk. The screen splits the conversation.</p>`);
+    setDisplay('何かお手伝いしましょうか？', '');
+    live(null);
+  },
+  you(){
+    sheet.innerHTML = shell(`
+      <div class="card"><h3>English — You · 19:06 · Listening</h3>
+      <p class="you partial">Where is the nearest…</p></div>${cardHistory}`);
+    setDisplay('何かお手伝いしましょうか？', '');
+    live(zYou, zPartner);
+  },
+  partner(){
+    sheet.innerHTML = shell(cardHistory);
+    setDisplay('えきは　まっすぐ…', 'partial');
+    live(zPartner, zYou);
+    $('partner').classList.add('flipped'); $('flip').classList.add('on');
+  },
+  result(){
+    sheet.innerHTML = shell(cardHistory);
+    setDisplay('駅はまっすぐ進んで、左です。', '');
+    live(null);
+  },
+  pack(){
+    sheet.innerHTML = shell(`
+      <div class="pack">
+        <h3>Japanese pack — 210 MB · ~40 s on Wi-Fi</h3>
+        <div class="btns"><span>Schedule download</span><span>Use saved phrases</span></div>
+      </div>
+      <div class="card" style="margin-top:12px"><h3>English — You · 19:04</h3>
+        <p class="you">Excuse me — where is the nearest station?</p><hr>
+        <p class="them">すみません、一番近い駅はどこですか？</p>
+        <div class="act"><span>Copy</span><span>Play</span><span>Keep</span></div>
+      </div>`);
+    setDisplay('すみません、一番近い駅はどこですか？', 'small');
+    live(null);
+    zPartner.classList.add('dim'); subPartner.textContent = 'Pack needed';
+  }
+};
+
+function setDisplay(text, cls){
+  display.textContent = text;
+  display.className = 'display' + (cls ? ' ' + cls : '');
+}
+function live(on, off){
+  [zYou, zPartner].forEach(z => z.classList.remove('live','dim'));
+  subYou.textContent = ''; subPartner.textContent = '';
+  ticks.classList.add('hidden');
+  if(on){ on.classList.add('live'); off.classList.add('dim'); ticks.classList.remove('hidden'); }
+}
+
+let flipped = false;
+function setFlip(v){
+  flipped = v;
+  $('partner').classList.toggle('flipped', v);
+  $('flip').classList.toggle('on', v);
+}
+
+document.querySelectorAll('#controls [data-s]').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('#controls [data-s]').forEach(x => x.classList.remove('on'));
+  b.classList.add('on');
+  $('showcard').classList.add('hidden'); $('phrases').classList.add('hidden');
+  $('show').classList.remove('on'); $('phr').classList.remove('on');
+  setFlip(false);
+  states[b.dataset.s]();
+  if(b.dataset.s === 'partner'){ /* state sets its own flip */ }
+}));
+
+$('flip').onclick = () => setFlip(!flipped);
+$('flipbtn').onclick = () => setFlip(!flipped);
+$('show').onclick = () => {
+  const v = $('showcard').classList.toggle('hidden');
+  $('show').classList.toggle('on', !v);
+};
+$('done').onclick = () => { $('showcard').classList.add('hidden'); $('show').classList.remove('on'); };
+$('phr').onclick = () => {
+  const v = $('phrases').classList.toggle('hidden');
+  $('phr').classList.toggle('on', !v);
+};
+
+states.ready();
+</script>
+</body>
+</html>
