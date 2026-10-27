@@ -1,13 +1,13 @@
 ---
-title: "Hi-fi spec — pack management + offline states"
-paperclip_issue: NEU-57
-document_key: hifi-packs-offline
-revision: 4
-revision_id: c42f53dc-2ee6-4d8c-9713-5beed5c2d9ac
-exported: 2026-10-27
+key: hifi-packs-offline
+revision: 5
+updated: 2026-10-27T15:55:25.177Z
+source: paperclip
 ---
 
-# Hi-fi spec — pack management + offline states · v1
+# Hi-fi spec — pack management + offline states
+
+> **Rev 5 (2026-10-27):** acid semantics extended to live/ready states on this surface by founder decision; confirm-card primary goes acid, ready rows + aggregate gain acid status dots, progress fill goes acid. Failures stay mono. Mockup v2 implements this revision; rev-4 mockup archived. · v1
 
 **What this is:** the pixel-level spec for the **pack management sheet** and the **cross-surface offline state rules**, in the reconciled ink/acid language. Direction-independent — this surface and these rules hold under any of the three concepts (concepts doc §Shared). Sibling specs: [hifi-conversation](hifi-conversation) v1, [hifi-home-solo](hifi-home-solo) v1. Binding sources: [design language inventory](design-language) v1 (measured tokens), ADR-0001 rev 3 (no cancel theater for translation; downloads are a network operation and follow §4's rules, not the translation rule).
 
@@ -52,7 +52,7 @@ Verification notes for Maya live in §9.
 
 Mono owns all numbers and status (design-language §2: numbers are always mono). All mono-caps strings carry the 1.45× localization width allowance and clip center, never wrap.
 
-**Zero acid on this surface.** The one-acid rule generalizes: acid marks the *live capture affordance*, and a management surface has none. Progress bars here are ink fill on a hairline track; the loudest thing on this screen is ordinary ink text. The VERB for this surface is *quiet*.
+**Acid marks what is live here (rev 5, founder call 2026-10-27).** Acid's meaning generalizes from "live capture" to **live/operative state**: a 6pt acid status dot rides every `READY` row and the aggregate line when ≥1 pack is installed ("this pack works right now"), the download progress fill is acid on the hairline track ("transferring now"), and the primary action on the confirm card is acid fill with on-acid ink text ("the live decision"). Idle actions (`GET`, `GET NOW`, queued labels) stay outlined or mono; **failures and the storage banner stay mono-gray — there is still no error color anywhere in the system.** First-run (zero packs) honestly carries no dots. Everything else remains ink/paper; the verb for this surface is still *quiet* — one hue, now doing visible work.
 
 ## 3 · Pack row anatomy
 
@@ -63,18 +63,18 @@ One row per language, h=72pt, hairline #E3E3E3 top, margins 20pt. Rows sort: nee
 
 | State | Right cluster (mono) | Tap behavior |
 |---|---|---|
-| `READY` | `READY · 84 MB` ink-text | Opens row action sheet: `DELETE PACK · FREES 84 MB` / `KEEP` (§5.7) |
+| `READY` | `● READY · 84 MB` ink-text, 6pt acid dot before the label | Opens row action sheet: `DELETE PACK · FREES 84 MB` / `KEEP` (§5.7) |
 | `READY — UPDATE` | `UPDATE · 12 MB` on a `READY` row | Tap applies the delta update; row briefly shows §4 progress |
 | `DOWNLOADABLE` | `GET · 210 MB` outlined 1pt #A6A6A6 button | Opens the confirm card (§4) |
 | `QUEUED` | `QUEUED — WI-FI` + small `GET NOW` beneath | `GET NOW` re-opens the confirm card in its mobile-data variant |
-| `DOWNLOADING` | `62% · 130/210 MB` over a 2pt ink progress bar (track hairline) | Tap pauses; label flips to `PAUSED — TAP TO RESUME` |
+| `DOWNLOADING` | `62% · 130/210 MB` over a 2pt acid progress fill (#E6FF00) on a hairline track | Tap pauses; label flips to `PAUSED — TAP TO RESUME` |
 | `ERROR — STORAGE` | `STORAGE FULL — NEED 210 MB` | Tap opens the row action sheet pre-focused on delete candidates (§5.6) |
 
 No chevrons, no decorative glyphs. Size is present at every state — **pack-size honesty is the surface's core promise** (concepts §Shared, design-language §3 meta-line provenance).
 
 ## 4 · Download lifecycle (the only state machine on this surface)
 
-1. **Confirm card** (tap `GET`) — half-sheet over the pack sheet: `JAPANESE PACK — 210 MB · ~40 S ON WI-FI`, body 15pt copy: what the pack contains in one line (`VOICE + TEXT, BOTH DIRECTIONS`), then two buttons: `DOWNLOAD ON WI-FI` (primary, ink fill) and `DOWNLOAD NOW — USES MOBILE DATA` (outlined). **Default is Wi-Fi; mobile data is always an explicit second tap, never a preselected option, never silent** (missing-pack honesty rule carried from hifi-conversation §5.10). No checkbox garden, no settings toggle on v1.
+1. **Confirm card** (tap `GET`) — half-sheet over the pack sheet: `JAPANESE PACK — 210 MB · ~40 S ON WI-FI`, body 15pt copy: what the pack contains in one line (`VOICE + TEXT, BOTH DIRECTIONS`), then two buttons: `DOWNLOAD ON WI-FI` (primary, acid fill #E6FF00 with on-acid #0D0D0D text, ≈17:1 contrast) and `DOWNLOAD NOW — USES MOBILE DATA` (outlined). **Default is Wi-Fi; mobile data is always an explicit second tap, never a preselected option, never silent** (missing-pack honesty rule carried from hifi-conversation §5.10). No checkbox garden, no settings toggle on v1.
 2. **Queued** — row enters `QUEUED — WI-FI`. Wi-Fi arrival starts the download automatically, no toast, no banner (ambient discipline — §6.1).
 3. **Downloading** — progress cluster per §3; downloads continue if the sheet is dismissed (background), surfaced ambiently via the header sublabel (§6.3). Network loss mid-download: the row flips to `PAUSED — RESUMES ON WI-FI`; it resumes on its own. The row *is* the notification.
 4. **Commit** — on 100% the row plays the one-beat shimmer (200–300 ms; the system's only transition theater) and lands as `READY · 210 MB` with the final on-disk size. No celebratory modal.
@@ -110,7 +110,7 @@ No chevrons, no decorative glyphs. Size is present at every state — **pack-siz
 ## 8 · Constraint compliance checklist
 
 - [x] Offline ambient and identical; no banners/modals/toasts on connectivity change (§6.1).
-- [x] Zero acid elements — one-acid rule generalized: no live capture affordance, no acid (§2).
+- [x] Acid binds to live state only — dots on ready rows, acid progress fill while downloading, acid primary on confirms; zero acid on idle/failure/first-run elements (§2, rev 5).
 - [x] ADR-0001 respected in spirit and letter: translation path carries no cancel (siblings); downloads use honest PAUSE/REMOVE verbs on a real interruptible operation (§4.5).
 - [x] One-beat shimmer (200–300 ms) is the only transition theater (§4.4).
 - [x] Pack-size honesty: a size figure is visible in every row state (§3).
@@ -129,7 +129,7 @@ No chevrons, no decorative glyphs. Size is present at every state — **pack-siz
 6. Missing-pack card matches §6.2 anatomy verbatim on both host surfaces; affected capture affordance + header carry the `PACK NEEDED` sublabel; header still measures 44pt.
 7. Header download sublabel `JA PACK · 62%` appears while downloading, tappable to this sheet; no toasts on any pack state change.
 8. Airplane mode: list pixel-identical, confirm card primary reads `QUEUE FOR WI-FI`.
-9. Tokens: paper sheet on paper-canvas, ink #0B0B0B progress/text, hairline #E3E3E3, outlines #A6A6A6, margins 20pt — and a per-element acid sweep finds **zero** acid on this surface.
+9. Tokens: paper sheet on paper-canvas, ink #0B0B0B text, hairline #E3E3E3, outlines #A6A6A6, margins 20pt — and a per-element acid sweep confirms acid #E6FF00 only on: ready dots, the live progress fill, and the confirm primary (rev 5). No red/error hues anywhere.
 
 ## 10 · Next in the hi-fi sequence
 
@@ -138,4 +138,3 @@ No chevrons, no decorative glyphs. Size is present at every state — **pack-siz
 3. Sprint close-out: founder's already-accepted direction + three hi-fi specs + two verified mockups become the build reference set; Maya's feasibility answers fold into rev 2s as they land.
 
 *Rev 1 skeleton (geometry + type) · rev 2 adds §3–4 · rev 3 adds §5–6 · rev 4 completes §7–10. Self-review against design-language tokens and sibling contracts: no contradictions found; §6.2 deliberately takes canonical ownership of components first sketched in the siblings.*
-

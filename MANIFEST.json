@@ -7,26 +7,125 @@
     "policy": "Mirrors accepted/current state only; WIP stays on the issue thread."
   },
   "documents": {
-    "specs/teardown.md":               { "documentKey": "teardown",               "revision": 1, "revisionId": "73fb674c-c437-484a-9da4-4a47d85d55be" },
-    "specs/journey-map.md":            { "documentKey": "journey-map",            "revision": 1, "revisionId": "23fccb74-5f6b-42ea-8e2b-ea921f53016b" },
-    "specs/concepts.md":               { "documentKey": "concepts",               "revision": 1, "revisionId": "a62b70fa-213a-4e44-8847-5783f9f88399" },
-    "specs/design-language.md":        { "documentKey": "design-language",        "revision": 1, "revisionId": "349826d3-4999-491c-8b18-2c7bb229e18e" },
-    "specs/design-system-tokens.md":   { "documentKey": "design-system-tokens",   "revision": 2, "revisionId": "6ea8016a-2312-4419-9541-27032cd73c8b" },
-    "specs/hifi-conversation.md":      { "documentKey": "hifi-conversation",      "revision": 1, "revisionId": "d7debda7-dbfd-4c5e-b98e-d74e58316617" },
-    "specs/hifi-home-solo.md":         { "documentKey": "hifi-home-solo",         "revision": 4, "revisionId": "6dc64f0c-0080-41d0-adb3-c14a316e9eaa" },
-    "specs/hifi-packs-offline.md":     { "documentKey": "hifi-packs-offline",     "revision": 4, "revisionId": "c42f53dc-2ee6-4d8c-9713-5beed5c2d9ac" },
-    "verification/facetoface-mockup-v2.md": { "documentKey": "facetoface-mockup-v2", "revision": 3, "revisionId": "b3fe5862-28ed-4cfe-ba13-bfba26085e8e" },
-    "verification/home-solo-mockup-v1.md":  { "documentKey": "home-solo-mockup-v1",  "revision": 1, "revisionId": "99c5bcb7-06f5-47d7-bd0b-ac39c2c163ad" },
-    "verification/packs-mockup-v1.md":      { "documentKey": "packs-mockup-v1",      "revision": 1, "revisionId": "a1ea3a2f-e0ab-4b73-8363-ef3661a5fa0f" }
+    "specs/teardown.md": {
+      "documentKey": "teardown",
+      "revision": 1,
+      "revisionId": "73fb674c-c437-484a-9da4-4a47d85d55be"
+    },
+    "specs/journey-map.md": {
+      "documentKey": "journey-map",
+      "revision": 1,
+      "revisionId": "23fccb74-5f6b-42ea-8e2b-ea921f53016b"
+    },
+    "specs/concepts.md": {
+      "documentKey": "concepts",
+      "revision": 1,
+      "revisionId": "a62b70fa-213a-4e44-8847-5783f9f88399"
+    },
+    "specs/design-language.md": {
+      "documentKey": "design-language",
+      "revision": 1,
+      "revisionId": "349826d3-4999-491c-8b18-2c7bb229e18e"
+    },
+    "specs/design-system-tokens.md": {
+      "documentKey": "design-system-tokens",
+      "revision": 3,
+      "revisionId": "bc159c2e-084e-4a38-99b3-ba02c1cbf3ea"
+    },
+    "specs/hifi-conversation.md": {
+      "documentKey": "hifi-conversation",
+      "revision": 1,
+      "revisionId": "d7debda7-dbfd-4c5e-b98e-d74e58316617"
+    },
+    "specs/hifi-home-solo.md": {
+      "documentKey": "hifi-home-solo",
+      "revision": 4,
+      "revisionId": "6dc64f0c-0080-41d0-adb3-c14a316e9eaa"
+    },
+    "specs/hifi-packs-offline.md": {
+      "documentKey": "hifi-packs-offline",
+      "revision": 5,
+      "revisionId": "0701f78a-2ae8-47e9-8149-e09f76b08f3b"
+    },
+    "verification/facetoface-mockup-v2.md": {
+      "documentKey": "facetoface-mockup-v2",
+      "revision": 3,
+      "revisionId": "b3fe5862-28ed-4cfe-ba13-bfba26085e8e"
+    },
+    "verification/home-solo-mockup-v1.md": {
+      "documentKey": "home-solo-mockup-v1",
+      "revision": 1,
+      "revisionId": "99c5bcb7-06f5-47d7-bd0b-ac39c2c163ad"
+    },
+    "verification/packs-mockup-v1.md": {
+      "documentKey": "packs-mockup-v1",
+      "revision": 1,
+      "revisionId": "a1ea3a2f-e0ab-4b73-8363-ef3661a5fa0f"
+    },
+    "verification/verification-2026-10-27.md": {
+      "documentKey": "verification-2026-10-27",
+      "revision": 1,
+      "revisionId": "72190edb-805a-41bc-b454-597cea849095"
+    }
   },
   "attachments": {
-    "mockups/neurora-facetoface-mockup-v2.html":          { "attachmentId": "3c05498d-6ccd-4614-a828-e1258217ef4b", "sha256": "ca13e9658a8fefae3869d40f52ca5c078cd1e6e6f498af6a00dbbff611498208" },
-    "state-sheets/neurora-facetoface-v2-state-sheet.png": { "attachmentId": "bbd2c075-2547-4fd8-aaa7-a9ab8564a57a", "sha256": "16170437c90cd4a571d79435cfa9f39077b1917dab7d5df04abfe979b571b147" },
-    "mockups/neurora-home-solo-mockup-v1.html":           { "attachmentId": "91e1d258-53b0-4ee0-a880-b72cfd23b5ed", "originalFilename": "neurora-home-solo-final.html", "sha256": "0d7c6fa226feac46a2f65d41a8d27077be242df4f3c3554e18594d962bb8c6ba" },
-    "state-sheets/neurora-home-solo-state-sheet.png":     { "attachmentId": "2ed4e127-e852-4c8a-8433-b393c6b98321", "sha256": "1392cccc515ad38321ad52d06fa8b52ff34d0739eed800227b8745a7a1ee625b" },
-    "mockups/neurora-packs-mockup-v1.html":               { "attachmentId": "bde05d22-08a6-4b92-a0ac-ea1f91bda2bf", "sha256": "1fe1706ab2ea4853ae4d752033fa9d3de417d0bb7ad78b9bc62bfba84ca619f6" },
-    "state-sheets/neurora-packs-state-sheet-v1.png":      { "attachmentId": "36beece3-ded1-4110-969c-19ee14e69ae2", "sha256": "cc9eb7e1c258dc385c6d6732ce9df3efb7c9dc57499ac06cf15c2344856dc57b" },
-    "mockups/archive/neurora-facetoface-mockup-v1.html":  { "attachmentId": "8c15859e-9f17-498b-9e3b-14047faa876d", "sha256": "594779c6d1b71496cff1877754e7a5491bea78dd030e681bb94cab0c03e4cb92", "note": "Superseded; kept for history." }
+    "mockups/neurora-home-solo-mockup-v1.html": {
+      "attachmentId": "91e1d258-53b0-4ee0-a880-b72cfd23b5ed",
+      "originalFilename": "neurora-home-solo-final.html",
+      "sha256": "0d7c6fa226feac46a2f65d41a8d27077be242df4f3c3554e18594d962bb8c6ba"
+    },
+    "mockups/archive/neurora-facetoface-mockup-v1.html": {
+      "attachmentId": "8c15859e-9f17-498b-9e3b-14047faa876d",
+      "sha256": "594779c6d1b71496cff1877754e7a5491bea78dd030e681bb94cab0c03e4cb92",
+      "note": "Superseded; kept for history."
+    },
+    "mockups/archive/neurora-packs-mockup-v1.html": {
+      "attachmentId": "bde05d22-08a6-4b92-a0ac-ea1f91bda2bf",
+      "sha256": "1fe1706ab2ea4853ae4d752033fa9d3de417d0bb7ad78b9bc62bfba84ca619f6",
+      "note": "Superseded by v2 (color pass); kept for history."
+    },
+    "mockups/archive/neurora-facetoface-mockup-v2.html": {
+      "attachmentId": "3c05498d-6ccd-4614-a828-e1258217ef4b",
+      "sha256": "ca13e9658a8fefae3869d40f52ca5c078cd1e6e6f498af6a00dbbff611498208",
+      "note": "Superseded by v3 (history scroll fix); kept for history."
+    },
+    "state-sheets/archive/neurora-facetoface-v2-state-sheet.png": {
+      "attachmentId": "bbd2c075-2547-4fd8-aaa7-a9ab8564a57a",
+      "sha256": "16170437c90cd4a571d79435cfa9f39077b1917dab7d5df04abfe979b571b147",
+      "note": "Superseded by v3 sheet (verified composer)."
+    },
+    "state-sheets/archive/neurora-home-solo-state-sheet.png": {
+      "attachmentId": "2ed4e127-e852-4c8a-8433-b393c6b98321",
+      "sha256": "1392cccc515ad38321ad52d06fa8b52ff34d0739eed800227b8745a7a1ee625b",
+      "note": "Superseded by v2 sheet (verified composer)."
+    },
+    "state-sheets/archive/neurora-packs-state-sheet-v1.png": {
+      "attachmentId": "36beece3-ded1-4110-969c-19ee14e69ae2",
+      "sha256": "cc9eb7e1c258dc385c6d6732ce9df3efb7c9dc57499ac06cf15c2344856dc57b",
+      "note": "Superseded by v2 sheet (color pass + verified composer)."
+    },
+    "mockups/neurora-packs-mockup-v2.html": {
+      "attachmentId": "2eafac82-82b9-4490-9101-9a274e760353",
+      "sha256": "43ee01cecc0183bbf1f9649700666f7974da897d4d862ceee88ab5b5dfca98f8",
+      "note": "Acid = live/ready color pass; DONE margin fix."
+    },
+    "mockups/neurora-facetoface-mockup-v3.html": {
+      "attachmentId": "741c793a-1000-400e-b622-79521c5e33fc",
+      "sha256": "20a3c0b53644c2a9da8538e1e7d0582a460a9c2afae0c9082742e9cb23ec5287",
+      "note": "History sheet scroll fix (Maya rev-2 item)."
+    },
+    "state-sheets/neurora-packs-state-sheet-v2.png": {
+      "attachmentId": "8b409324-6eb6-48cf-b801-57cf18d32596",
+      "sha256": "c41a577e2f84e2f5417f78fe1661e4ac542d7e8a673e11e34ba2b9d9554262eb"
+    },
+    "state-sheets/neurora-home-solo-state-sheet-v2.png": {
+      "attachmentId": "057620b9-8f75-4dbf-92e5-e9527a00d52c",
+      "sha256": "fb11b1e39ee67efdfb6dbe195ddf87084fd39d84b7da37e7add76e35257b234b"
+    },
+    "state-sheets/neurora-facetoface-state-sheet-v3.png": {
+      "attachmentId": "f87cd865-7f48-4433-bff4-e2dea114702d",
+      "sha256": "bbd48cfb76f8a3f55fcec80429fd67e379d8fee8158b297b5638ad49494cee26"
+    }
   },
   "notMirrored": [
     "Founder-supplied brand boards + current-build captures (2026-10-14; user-owned uploads, remain on the issue)",

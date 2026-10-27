@@ -1,13 +1,13 @@
 ---
-title: "Design system tokens — ink/acid v1"
-paperclip_issue: NEU-57
-document_key: design-system-tokens
-revision: 2
-revision_id: 6ea8016a-2312-4419-9541-27032cd73c8b
-exported: 2026-10-27
+key: design-system-tokens
+revision: 3
+updated: 2026-10-27T15:55:35.010Z
+source: paperclip
 ---
 
 # Design system tokens — ink/acid v1
+
+> **Rev 3 (2026-10-27):** `acid` semantics extended from capture-only to live/ready states (founder decision on NEU-57 review). Pack-surface bindings: `rdot` status dots, progress fill, confirm primary. Error-color ban unchanged. Packs spec rev 5 + mockup v2 carry the geometry.
 
 **What this is:** the engineering bridge for the accepted direction. Every measured value from the [design-language inventory](#document-design-language) and the three hi-fi specs ([conversation](#document-hifi-conversation) · [home/solo](#document-hifi-home-solo) · [packs](#document-hifi-packs-offline)) consolidated into named tokens with their SwiftUI and Compose counterparts. This doc is normative: where a spec and this table ever disagree, comment here — one source of truth per value.
 
@@ -19,7 +19,7 @@ All hex is sRGB. `light`/`dark` applies to accessibility variants only — v1 is
 
 | Token | Hex (normative) | SwiftUI | Compose | Used for |
 |---|---|---|---|---|
-| `acid` | **#E6FF00** | `NeuroraTheme.Color.acid` | `NeuroraTheme.colors.acid` | Live capture affordance only (orb, mic zone fill, focus ring). **One acid element per surface.** |
+| `acid` | **#E6FF00** | `NeuroraTheme.Color.acid` | `NeuroraTheme.colors.acid` | **What is live now** (rev 3, founder call 2026-10-27): capture affordance (orb, mic zone fill, focus ring), live transfer progress, ready-status dots, confirm-card primary. Never decoration, never idle actions. |
 | `on-acid` | #0D0D0D | `.onAcid` | `.onAcid` | Glyphs/labels on acid |
 | `ink` | **#0B0B0B** *(not pure black — OLED smear, §5–3)* | `.ink` | `.ink` | Partner panel canvas, show-card, ink fills, primary buttons |
 | `paper` | #FFFFFF | `.paper` | `.paper` | Cards, sheets, fields |
@@ -32,7 +32,7 @@ All hex is sRGB. `light`/`dark` applies to accessibility variants only — v1 is
 | `outline` | #A6A6A6 | `.outline` | `.outline` | 1pt outlines: pills, `GET` buttons, outlined actions |
 | `acid-dim` | #92A202 | `.acidDim` | `.acidDim` | Progress hairline riding on the acid block |
 
-**Rule (load-bearing):** acid never appears on a non-capture surface — the packs spec's zero-acid sweep is a per-element assertion, not a style preference. Engineering check: a lint/test asserting `acid` is referenced only by capture components would pay for itself. **There is no error color anywhere in the system** — failures render in mono-gray with honest copy.
+**Rule (load-bearing, rev 3):** acid binds to *live/operative* state only. Allowed bindings: capture surfaces (orb / active mic zone / focus ring), pack surface (ready-status dots, live download progress fill, confirm-card primary), and nothing else. Engineering check: a lint/test asserting `acid` is referenced only by live-state components would pay for itself. **There is no error color anywhere in the system** — failures render in mono-gray with honest copy; that law is unchanged.
 
 ## 2 · Type tokens
 
@@ -123,4 +123,3 @@ Deltas engineering hits when applying these tokens to the existing app — recor
 - rev 2 — §1 color tokens + §2 type tokens.
 - rev 3 — §3 geometry/spacing + §4 component name map.
 - rev 4 — §5 drift ledger + §6 engineering consumption notes. Doc complete.
-

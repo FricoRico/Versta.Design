@@ -16,8 +16,8 @@ language — founder verdict 2026-10-26 19:43Z on the direction-check card).
 | Path | Contents |
 |---|---|
 | `specs/` | Issue documents exported as markdown: teardown, journey map, concepts + decision log, design-language inventory, **design-system-tokens** (normative), and the three hi-fi specs (conversation split, home/solo orb-dock, packs + offline) |
-| `mockups/` | Verified single-file HTML mockups (fonts embedded, fully offline). `archive/` holds the superseded Face-to-Face v1 |
-| `state-sheets/` | Rendered contact sheets (PNG), all states at 390×844, produced from the final artifacts |
+| `mockups/` | Verified single-file HTML mockups (fonts embedded, fully offline). `archive/` holds superseded revisions |
+| `state-sheets/` | Rendered contact sheets (PNG), all states at native 390×844, produced by the audited composer (DOM overlap check before rasterizing). `archive/` holds superseded sheets |
 | `tokens/` | Machine-readable tokens: `tokens.json` (+ SwiftUI/Compose names), `tokens.css` (custom properties) |
 | `verification/` | Headless verification records per mockup package (DOM assertions + pixel probes + font forced-load checks) |
 
@@ -37,13 +37,18 @@ export time (sha256 below).
 
 | File | Paperclip attachment | sha256 (first 12) |
 |---|---|---|
-| `mockups/neurora-facetoface-mockup-v2.html` | `3c05498d-…` | `ca13e9658a8f` |
-| `state-sheets/neurora-facetoface-v2-state-sheet.png` | `bbd2c075-…` | `16170437c90c` |
+| `mockups/neurora-facetoface-mockup-v3.html` | `741c793a-…` | `20a3c0b53644` |
+| `state-sheets/neurora-facetoface-state-sheet-v3.png` | `f87cd865-…` | `bbd48cfb76f8` |
 | `mockups/neurora-home-solo-mockup-v1.html` | `91e1d258-…` (uploaded as `neurora-home-solo-final.html`) | `0d7c6fa226fe` |
-| `state-sheets/neurora-home-solo-state-sheet.png` | `2ed4e127-…` | `1392cccc515a` |
-| `mockups/neurora-packs-mockup-v1.html` | `bde05d22-…` | `1fe1706ab2ea` |
-| `state-sheets/neurora-packs-state-sheet-v1.png` | `36beece3-…` | `cc9eb7e1c258` |
+| `state-sheets/neurora-home-solo-state-sheet-v2.png` | `057620b9-…` | `fb11b1e39ee6` |
+| `mockups/neurora-packs-mockup-v2.html` | `2eafac82-…` | `43ee01cecc01` |
+| `state-sheets/neurora-packs-state-sheet-v2.png` | `8b409324-…` | `c41a577e2f84` |
+| `mockups/archive/neurora-facetoface-mockup-v2.html` | `3c05498d-…` | `ca13e9658a8f` |
 | `mockups/archive/neurora-facetoface-mockup-v1.html` | `8c15859e-…` | `594779c6d1b7` |
+| `mockups/archive/neurora-packs-mockup-v1.html` | `bde05d22-…` | `1fe1706ab2ea` |
+| `state-sheets/archive/neurora-facetoface-v2-state-sheet.png` | `bbd2c075-…` | `16170437c90c` |
+| `state-sheets/archive/neurora-home-solo-state-sheet.png` | `2ed4e127-…` | `1392cccc515a` |
+| `state-sheets/archive/neurora-packs-state-sheet-v1.png` | `36beece3-…` | `cc9eb7e1c258` |
 
 **Not mirrored:** the founder-supplied brand boards and current-build captures
 (2026-10-14, user-owned uploads — remain on the issue thread), and the five
@@ -54,9 +59,10 @@ mockups).
 
 Ink on paper, near-monochrome by construction. Exactly one hue exists — **acid
 #E6FF00** — and it is functional, not decorative: it marks the live-capture
-affordance and appears at most once per surface (orb on home/solo; active mic
-zone on the conversation split). Management surfaces (packs) carry none. There
-is no error color anywhere; failures are mono-gray honest copy. Full token set
+affordance (orb on home/solo; active mic zone on the conversation split) — and,
+per founder decision 2026-10-27, anything *live/operative*: ready-status dots,
+download progress, and confirm primaries on the packs surface. There is no error
+color anywhere; failures are mono-gray honest copy. Full token set
 and rationale: `specs/design-system-tokens.md`, `specs/design-language.md`.
 
 — Jonas Ferreira (product design). Maintainer of this archive; Maya Lindqvist
