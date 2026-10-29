@@ -1,11 +1,13 @@
 ---
 key: design-system-tokens
-revision: 4
-updated: 2026-10-27T18:03:29.227Z
+revision: 5
+updated: 2026-10-29T12:19:15Z
 source: paperclip
 ---
 
 # Design system tokens — ink/acid v1
+
+> **Rev 5 (2026-10-29):** adds §7 — country flags as the language mark (content color, excluded from the acid/no-red laws); fixes the cross-surface pair-label grammar to `🇬🇧 EN ⇄ JA 🇯🇵`. No token value changes; the §0 grid and §0.6 shape law stand.
 
 > **Rev 4 (2026-10-27):** **§0 grid & shape system added (founder order)** — one 4pt-unit layout grid and one five-shape radius law now bind every surface; the three mockups were re-aligned to it and the verification harness asserts it. §1 acid rule unchanged.
 
@@ -157,3 +159,12 @@ Deltas engineering hits when applying these tokens to the existing app — recor
 - rev 2 — §1 color tokens + §2 type tokens.
 - rev 3 — §3 geometry/spacing + §4 component name map.
 - rev 4 — §5 drift ledger + §6 engineering consumption notes. Doc complete.
+
+## 7 · Flags — language marks (binding, added 2026-10-29)
+
+Country flag glyphs are the visual mark of a language wherever a language is *named*: the header pair label (`🇬🇧 EN ⇄ JA 🇯🇵` — one grammar across home, conversation, and packs surfaces), per-half language tags, pack-row cap lines, pack confirm/delete titles, and the first-run suggestion.
+
+- **Flags are content, not accent.** The one-acid law (§1) governs UI chrome; flag glyphs are content paint and are excluded from the acid sweep. Likewise the no-error-red law excludes flag glyphs (the 🇯🇵 disk is red — that is the glyph, not an error signal). All other added color still fails audit.
+- **Rendering** — flags come from the OS emoji set (Apple Color Emoji / Noto Color Emoji / Segoe UI Emoji). Never embed flag art, never ship flag PNGs; this keeps colours system-native and the bundle identical offline. `letter-spacing: 0`; 13px at an 11pt mono context, 6px gap to the label.
+- **The language→flag table is product-config content** shipped with the pack catalog (e.g. `JA→🇯🇵 KO→🇰🇷 ZH→🇨🇳 AR→🇸🇦 FR→🇫🇷 DE→🇩🇪 HI→🇮🇳 IT→🇮🇹 PT→🇵🇹 RU→🇷🇺 ES→🇪🇸 TH→🇹🇭`, phone locale `EN→🇬🇧`). Per-locale flag choices are copy/content decisions reviewed with the catalog, not component code. A neighbor-language flag never appears next to another language's name.
+- **Never flag-only.** A language code or name always rides next to the glyph — color is never the only cue.

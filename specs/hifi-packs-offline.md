@@ -1,11 +1,13 @@
 ---
 key: hifi-packs-offline
-revision: 6
-updated: 2026-10-27T18:03:23.187Z
+revision: 7
+updated: 2026-10-29T12:19:15Z
 source: paperclip
 ---
 
 # Hi-fi spec — pack management + offline states
+
+> **Rev 7 (2026-10-29, flags pass):** languages are flagged wherever named on this surface — each pack row's cap line carries the flag glyph first (`🇯🇵 JAPANESE`), the confirm card and delete sheet titles are flagged, and the first-run suggested row is flagged. Pair label adopts the grammar `🇬🇧 EN ⇄ JA 🇯🇵`. Language→flag table ships as product-config content with the catalog (tokens doc rev 5); per-locale flag politics is a *content* decision, not a components decision. Flags are content color: the zero-red / acid policies are untouched (verified in paint: acid counts unchanged from rev 6 — resting 72, confirm ~16k primary only, first-run 0). No row geometry change. Verified reference: mockup v4 + state sheet v4 (audit: 0 blocking, 0 grid flags, 8/8 states).
 
 > **Rev 6 (2026-10-27, second founder revision pass):** contrast + shape/grid compliance. Row actions go high-contrast ink: `GET · nm MB` and `UPDATE · nm MB` are now **ink-filled capsules with paper text** (≈16.9:1; were 1pt outlined); the `GET NOW` secondary goes ink (was mono-gray); confirm/delete secondary buttons get a 1pt ink-text outline (was outline-gray). Acid rule from rev 5 unchanged — acid stays on live/operative state only; idle actions are now *ink*, not acid and not gray. All radii resolve to the shape law ([tokens §0.6](design-system-tokens)); the sheet aligns to the 4pt grid (tokens §0). Host-home surface synced to hifi-home-solo v2 (cell meta line, single SAVED toggle). Mockup v3 is the verified reference.
 

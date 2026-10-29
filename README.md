@@ -10,6 +10,9 @@ thread 2026-10-26 19:54Z, directed by the founder 2026-10-27 14:24Z.
 
 **Accepted direction: Face-to-Face** (split conversation surface, ink/acid
 language — founder verdict 2026-10-26 19:43Z on the direction-check card).
+Current package (2026-10-29): **F2F v5 ground-up redesign** (paired circle mics,
+one-moment content model, seam-history gesture) and **country flags** as the
+language mark across all surfaces (tokens §7).
 
 ## Layout
 
@@ -37,12 +40,18 @@ export time (sha256 below).
 
 | File | Paperclip attachment | sha256 (first 12) |
 |---|---|---|
-| `mockups/neurora-facetoface-mockup-v4.html` | `463f0a6b-…` | `ca935add61b2` |
-| `state-sheets/neurora-facetoface-state-sheet-v4.png` | `c46a2144-…` | `15742f714cfd` |
-| `mockups/neurora-home-solo-mockup-v2.html` | `2f515f51-…` | `b3966bb24ff6` |
-| `state-sheets/neurora-home-solo-state-sheet-v3.png` | `d7cfd616-…` | `578d192b9f77` |
-| `mockups/neurora-packs-mockup-v3.html` | `41ee4490-…` | `1f77349dfa13` |
-| `state-sheets/neurora-packs-state-sheet-v3.png` | `0784678c-…` | `b1ac3925429b` |
+| `mockups/neurora-facetoface-mockup-v5.html` | `3d2e0f01-…` | `ec3d8289ee88` |
+| `state-sheets/neurora-facetoface-state-sheet-v5.png` | `b7221519-…` | `da0bd32dca8b` |
+| `mockups/neurora-home-solo-mockup-v3.html` | `d4dba383-…` | `b29b2c54b313` |
+| `state-sheets/neurora-home-solo-state-sheet-v4.png` | `3d864a32-…` | `7c7fb43c6ada` |
+| `mockups/neurora-packs-mockup-v4.html` | `daf0e46a-…` | `24be188bda6c` |
+| `state-sheets/neurora-packs-state-sheet-v4.png` | `429b0eff-…` | `eabd0cfbe8fd` |
+| `mockups/archive/neurora-facetoface-mockup-v4.html` | `463f0a6b-…` | `ca935add61b2` |
+| `state-sheets/archive/neurora-facetoface-state-sheet-v4.png` | `c46a2144-…` | `15742f714cfd` |
+| `mockups/archive/neurora-home-solo-mockup-v2.html` | `2f515f51-…` | `b3966bb24ff6` |
+| `state-sheets/archive/neurora-home-solo-state-sheet-v3.png` | `d7cfd616-…` | `578d192b9f77` |
+| `mockups/archive/neurora-packs-mockup-v3.html` | `41ee4490-…` | `1f77349dfa13` |
+| `state-sheets/archive/neurora-packs-state-sheet-v3.png` | `0784678c-…` | `b1ac3925429b` |
 | `mockups/archive/neurora-facetoface-mockup-v3.html` | `741c793a-…` | `20a3c0b53644` |
 | `state-sheets/archive/neurora-facetoface-state-sheet-v3.png` | `f87cd865-…` | `bbd48cfb76f8` |
 | `mockups/archive/neurora-home-solo-mockup-v1.html` | `91e1d258-…` (uploaded as `neurora-home-solo-final.html`) | `0d7c6fa226fe` |

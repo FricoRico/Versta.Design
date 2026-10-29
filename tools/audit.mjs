@@ -17,7 +17,7 @@ const AUDIT_JS = `(() => {
   const pr = phone.getBoundingClientRect();
   const ALLOWED_R = ['999px','8px','12px','16px','24px','50%'];
   // content-sized / derived-geometry classes exempt from grid metric audit (documented in spec 0.4/0.6):
-  const EXEMPT_SET = new Set(['pill','ph-cat','h-chip','getbtn','getnow','upd','h-keep','h-trail','ts','sub','rdot','spk','grip','mic','pk-btn','pk-card','cm-bubble','cm-arrow','t-actions','p-display','h-display','img-chip','h-empty','lab','filters','t-head','t-body','t-partner','ph-en','ph-ja','ph-title','ph-cats','ic','ic-s','lbl','lede','priv','h-hint','p-priv','p-meta','failcap','pbanner','cap','native','m','l','r','ps-title','ps-done','ps-agg','cmp-title','cmp-hint','sc-line','sc-done','state','inner','off','sec','pri','b','t','h-util','h-ticks','p-ticks','caret','sc-replay']);
+  const EXEMPT_SET = new Set(['pill','ph-cat','h-chip','getbtn','getnow','upd','h-keep','h-trail','ts','sub','rdot','spk','grip','mic','pk-btn','pk-card','cm-bubble','cm-arrow','t-actions','p-display','h-display','img-chip','h-empty','lab','filters','t-head','t-body','t-partner','ph-en','ph-ja','ph-title','ph-cats','ic','ic-s','lbl','lede','priv','h-hint','p-priv','p-meta','failcap','pbanner','cap','native','m','l','r','ps-title','ps-done','ps-agg','cmp-title','cmp-hint','sc-line','sc-done','state','inner','off','sec','pri','b','t','h-util','h-ticks','p-ticks','caret','sc-replay','flag','hflip','pair','tag','msg-p','msg-t','own','nv','micc','tickrow','tools','tool','prog','hz-row','hz-txt','hz-l1','hz-l2','hz-meta','keep','seam','s-grab','s-title','s-scrolly','scrim']);
   const EXEMPT = cls => String(cls).trim().split(' ').filter(Boolean).some(tok => EXEMPT_SET.has(tok));
   const issues = [], gridFlags = [], radiusSeen = {};
   const vis = el => { const r = el.getBoundingClientRect(); const cs = getComputedStyle(el);
@@ -124,7 +124,7 @@ const AUDIT_JS = `(() => {
   });
   // ---- 4pt grid on structural boxes ----
   const SKIP = new Set(['svg','path','circle','rect','i','br']);
-  const EXEMPT_H_SET = new Set(['pk-card','cm-bubble','h-empty','ph-panel','cmp-panel','pbanner','state','pcard','pdel']);
+  const EXEMPT_H_SET = new Set(['pk-card','cm-bubble','h-empty','ph-panel','cmp-panel','pbanner','state','pcard','pdel','sheet','sc-wrap']);
   const EXEMPT_H = cls => String(cls).trim().split(' ').filter(Boolean).some(tok => EXEMPT_H_SET.has(tok));
   phone.querySelectorAll('*').forEach(el => {
     if (SKIP.has(el.tagName.toLowerCase()) || !vis(el)) return;

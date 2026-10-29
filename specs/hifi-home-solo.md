@@ -1,11 +1,13 @@
 ---
 key: hifi-home-solo
-revision: 5
-updated: 2026-10-27T18:02:56.900Z
+revision: 6
+updated: 2026-10-29T12:19:15Z
 source: paperclip
 ---
 
 # Hi-fi spec — home/solo (orb-dock) · v2
+
+> **Rev 6 (2026-10-29, flags pass):** the header pair label adopts the cross-surface grammar `🇬🇧 EN ⇄ JA 🇯🇵` — flag glyphs at 13px, codes mono 11pt, `⇄` mono-gray (was `English ↔ Japanese`). Flags are *content*, not accent (tokens doc rev 5); the orb stays the only acid element on this surface and the acid sweep assertion is unchanged. No other anatomy change. Verified reference: mockup v3 + state sheet v4 (audit: 0 blocking, 0 grid flags, 9/9 states).
 
 > **Rev 2 (2026-10-27, second founder revision pass):** declutter + placement consistency + grid/shape compliance. Cells lose the per-row replay glyph (replay lives on the show-card the cell opens); the `KEEP` tag moves *inline into the timestamp line* (one right-edge meta line per cell, no trailing cluster fighting the timestamp); the `RECENT` header drops the redundant `ALL` chip — a single `SAVED` toggle chip does the filter. All radii resolve to the shape law ([tokens §0.6](design-system-tokens)); placement follows the binding placement law (tokens §0.7) — dock owns the bottom 84pt, utilities never move, the row above the dock holds one tenant (FACE TO FACE bar ⇄ capture cluster). The whole surface aligns to the 4pt grid (tokens §0) — mockup v2 is the verified reference.
 
