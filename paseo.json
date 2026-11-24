@@ -1,0 +1,22 @@
+{
+  "worktree": {
+    "setup": [
+      "node -e 'JSON.parse(require(\"fs\").readFileSync(\"MANIFEST.json\",\"utf8\")); console.log(\"design manifest ok\")'"
+    ],
+    "teardown": [
+      "rm -rf node_modules"
+    ],
+    "teardownTimeoutMs": 30000
+  },
+  "metadataGeneration": {
+    "branchName": {
+      "instructions": "Branch names come from the Kaneo card: VER-<number>, e.g. VER-41 — design work is filed under the Versta App project. Base is main."
+    },
+    "commitMessage": {
+      "instructions": "Imperative subject under 72 characters. This repository mirrors accepted state only, so the commit body must cite the verdict that made the change accepted: where it was decided, who decided it, and when. Unaccepted drafts do not belong here."
+    },
+    "pullRequest": {
+      "instructions": "Open against main. Body must cite the deciding comment or verdict (issue, author, timestamp) and list which MANIFEST.json entries were added or replaced. Note that tools/audit.mjs needs Playwright, which is not installed in this image, so say whether the audit actually ran."
+    }
+  }
+}
